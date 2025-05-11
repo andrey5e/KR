@@ -98,14 +98,14 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
                         gameController->infoLabel->setText("Вы Проиграли!");
                     }
                 }
-
                 while (gameController->getGameState() == GameState::ENEMY_TURN) {
-                    // ход бота
+                    
+                    // Ход ai
                     gameController->botShot();
                     repaint();
                     QApplication::processEvents();
 
-                    // проверка на завершение игры
+                    // Проверка: завершение игры
                     int gO_status = gameController->checkForGameOver();
                     if (gameController->checkForGameOver() != 0) {
                         if (gO_status == 2) {
@@ -118,6 +118,108 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
                     }
                 }
             }
+        }
+    }
+}
+
+// Перерисовка каждого хода
+void MainWindow::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+    QPainter painter(this);
+    QVector<Cell> currentCellsState = gameController->getPlayerAllCells();
+
+    // Отрисовка поля игрока
+    for (int i {0}; i < currentCellsState.size(); i++) {
+        if (currentCellsState[i] == Cell::SHIP) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(MYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(MYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(MYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(MYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/full.png"));
+        } else if (currentCellsState[i] == Cell::DAMAGED) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(MYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(MYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(MYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(MYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/redhalf.png"));
+        } else if (currentCellsState[i] == Cell::DEAD) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(MYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(MYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(MYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(MYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/redfull.png"));
+        } else if (currentCellsState[i] == Cell::DOT) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(MYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(MYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(MYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(MYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/dot.png"));
+        }
+    }
+    QVector<Cell> currentCellsStateBot = gameController->getBotAllCells();
+
+    // Отрисовка поля бота
+    for (int i {0}; i < currentCellsStateBot.size(); i++) {
+        if (currentCellsStateBot[i] == Cell::DOT) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(ENEMYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(ENEMYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/dot.png"));
+        } else if (currentCellsStateBot[i] == Cell::DAMAGED) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(ENEMYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(ENEMYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/half.png"));
+        } else if (currentCellsStateBot[i] == Cell::DEAD) {
+            QPoint drawPoint;
+            int x = i % 10;
+            int y = i / 10;
+            if (x < 5 && y < 5) {
+                drawPoint.setX(ENEMYFIELD_X + (x * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_Y + (y * CELL_SIZE));
+            } else {
+                drawPoint.setX(ENEMYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+                drawPoint.setY(ENEMYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+            }
+            painter.drawPixmap(drawPoint, QPixmap(":images/full.png"));
         }
     }
 }
