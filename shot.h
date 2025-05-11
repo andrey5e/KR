@@ -4,10 +4,8 @@
 #include <QPoint>
 #include <QDebug>
 
-class ShotsStrategy
-{
+class ShotsStrategy {
 public:
-    // функция будет просто возвращать QPoint, а в gameController уже будет все обрабатываться
     virtual QPoint shot(QPoint point = QPoint(0, 0)) = 0;
 };
 
