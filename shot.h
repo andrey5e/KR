@@ -11,4 +11,9 @@ public:
     virtual QPoint shot(QPoint point = QPoint(0, 0)) = 0;
 };
 
+class ManualShotStrategy : public ShotsStrategy {
+public:
+    QPoint shot(QPoint point = QPoint(0, 0)) override;
+};
+
 #endif // SHOT_H
