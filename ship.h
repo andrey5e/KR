@@ -31,7 +31,6 @@ class TwoPartShip : public Ship {
 public:
     TwoPartShip() {
         weight = 2;
-
         shipHealth = weight;
     }
 };
@@ -40,7 +39,14 @@ class ThreePartShip : public Ship {
 public:
     ThreePartShip() {
         weight = 3;
+        shipHealth = weight;
+    }
+};
 
+class FourPartShip : public Ship {
+public:
+    FourPartShip() {
+        weight = 4;
         shipHealth = weight;
     }
 };
