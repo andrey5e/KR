@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "board.h"
-#include "Defines.h"
-#include "shotsstrategy.h"
+#include "field.h"
+#include "defines.h"
+#include "shots.h"
 
 class Player {
 public:
