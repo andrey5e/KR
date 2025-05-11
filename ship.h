@@ -27,4 +27,13 @@ public:
     }
 };
 
+class TwoPartShip : public Ship {
+public:
+    TwoPartShip() {
+        weight = 2;
+
+        shipHealth = weight;
+    }
+};
+
 #endif // SHIP_H
