@@ -12,4 +12,21 @@ enum Cell {
     DAMAGED
 };
 
+class Board {
+public:
+    Board();
+    void addShip(Ship* ship);
+    void setCellState(QPoint point, Cell state);
+    Cell getCellState(QPoint point);
+    void printBoardStates();
+    QVector<Cell> getCells();
+    QVector<Ship *> getFlot();
+    void prettyPrintFlot();
+    void clear();
+    Ship *getShipByCell(QPoint point);
+private:
+    QVector<Cell> cells;
+    QVector<Ship*> flot;
+};
+
 #endif // FIELD_H
