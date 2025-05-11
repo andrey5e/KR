@@ -223,3 +223,22 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         }
     }
 }
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    if (gameController->getGameState() == GameState::SHIPS_PLACING) {
+        if (event->key() == Qt::Key_Space) {
+            if (gameController->checkPlayerShipPlacement()) {
+                
+                // Синхронизация кораблей и клеток
+                gameController->syncPlayerShipsCells();
+
+                // Расстановка вражеских кораблей ботом
+                gameController->botRandomShipsPlacing();
+
+                // Смена состояния (Ход игрока)
+                gameController->setGameState(GameState::PLAYER_TURN);
+                gameController->infoLabel->setText("Твой Ход!");
+            }
+        }
+    }
+}
