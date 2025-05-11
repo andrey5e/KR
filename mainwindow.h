@@ -18,5 +18,7 @@ public:
     ~MainWindow();
     QPoint getCoordsPlayer(int x, int y);
     QPoint getCoords(int x, int y, int fieldX, int fieldY);
+private:
+    GameController* gameController;
 
 #endif // MAINWINDOW_H
