@@ -3,7 +3,7 @@
 
 #include "field.h"
 #include "defines.h"
-#include "shots.h"
+#include "shot.h"
 
 class Player {
 public:
