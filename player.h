@@ -26,4 +26,12 @@ public:
     Ship* createShip(int w) override;
 };
 
+class AIPlayer : public Player {
+public:
+    AIPlayer() {
+        shotS = new FullRandomShotStrategy();
+    };
+    Ship* createShip(int w) override;
+};
+
 #endif // PLAYER_H
