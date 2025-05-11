@@ -18,4 +18,12 @@ protected:
     ShotsStrategy* shotS;
 };
 
+class HumanPlayer : public Player {
+public:
+    HumanPlayer() {
+        shotS = new ManualShotStrategy();
+    };
+    Ship* createShip(int w) override;
+};
+
 #endif // PLAYER_H
