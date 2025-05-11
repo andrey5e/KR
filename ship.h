@@ -36,4 +36,13 @@ public:
     }
 };
 
+class ThreePartShip : public Ship {
+public:
+    ThreePartShip() {
+        weight = 3;
+
+        shipHealth = weight;
+    }
+};
+
 #endif // SHIP_H
