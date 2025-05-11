@@ -38,5 +38,10 @@ public:
     void takeShot(Player* whoShots, Player* whoseField, QPoint point);
     void swapGameState();
     int checkForGameOver();
+private:
+    GameState gameState;
+    Player* player;
+    Player* bot;
+};
 
 #endif // CONTROLLER_H
