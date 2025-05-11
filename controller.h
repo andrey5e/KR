@@ -8,4 +8,20 @@ enum GameState {
     GAMEOVER
 };
 
+
+class GameController {
+public:
+    GameController();
+    ~GameController();
+    GameState getGameState();
+    void createFlots();
+    int getPlayerShipCellsCount();
+    int getBotShipCellsCount();
+    bool isPlayerEmptyCell(QPoint point);
+    bool isBotEmptyCell(QPoint point);
+    void setPlayerCellState(QPoint point, int stateNum);
+    void setBotCellState(QPoint point, int stateNum);
+    Cell getBotCellState(QPoint point);
+    Cell getPlayerCellState(QPoint point);
+
 #endif // CONTROLLER_H
