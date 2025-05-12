@@ -1,27 +1,21 @@
 #include "ship.h"
 
-
-int Ship::getWeight()
-{
+int Ship::getWeight() {
     return weight;
 }
 
-void Ship::setCoords(QPoint point)
-{
+void Ship::setCoords(QPoint point) {
     coords = point;
 }
 
-int Ship::getHealth()
-{
+int Ship::getHealth() {
     return shipHealth;
 }
 
-QPoint Ship::getCoords()
-{
+QPoint Ship::getCoords() {
     return coords;
 }
 
-void Ship::shipDamage()
-{
+void Ship::shipDamage() {
     shipHealth--;
 }
