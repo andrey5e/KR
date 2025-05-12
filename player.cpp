@@ -3,46 +3,40 @@
 Player::Player() {
     board = new Board();
 }
-
 Player::~Player() {}
 
-void Player::createFlot()
-{
-    // четырехпалубники
+void Player::createFlot() {
+    
+    // 4 - палубники
     for (int i {0}; i < SHIPS4COUNT; i++) {
         board->addShip(createShip(4));
     }
 
-    // трехпалубники
+    // 3 - палубники
     for (int i {0}; i < SHIPS3COUNT; i++) {
         board->addShip(createShip(3));
     }
 
-    // двухпалубники
+    // 2 - палубники
     for (int i {0}; i < SHIPS2COUNT; i++) {
         board->addShip(createShip(2));
     }
 
-    // однопалубники
+    // 1 - палубники
     for (int i {0}; i < SHIPS1COUNT; i++) {
         board->addShip(createShip(1));
     }
 }
 
-Board *Player::getBoard()
-{
+Board *Player::getBoard() {
     return board;
 }
 
-QPoint Player::performShot(QPoint point)
-{
+QPoint Player::performShot(QPoint point) {
     return shotS->shot(point);
 }
 
-
-
-Ship* HumanPlayer::createShip(int w)
-{
+Ship* HumanPlayer::createShip(int w) {
     if (w == 1) {
         return new OnePartShip();
     } else if (w == 2) {
@@ -52,13 +46,12 @@ Ship* HumanPlayer::createShip(int w)
     } else if (w == 4) {
         return new FourPartShip();
     } else {
-        qDebug() << "Введен некорректный вес корабля";
+        qDebug() << "Введён некорректный вес корабля";
         return nullptr;
     }
 }
 
-Ship* AIPlayer::createShip(int w)
-{
+Ship* AIPlayer::createShip(int w) {
     if (w == 1) {
         return new OnePartShip();
     } else if (w == 2) {
@@ -68,7 +61,7 @@ Ship* AIPlayer::createShip(int w)
     } else if (w == 4) {
         return new FourPartShip();
     } else {
-        qDebug() << "Введен некорректный вес корабля";
+        qDebug() << "Введён некорректный вес корабля";
         return nullptr;
     }
 }
