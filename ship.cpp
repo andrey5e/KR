@@ -1,6 +1,6 @@
 #include "ship.h"
 
-// Получение веса корабля
+// Получение веса (размера) корабля
 int Ship::getWeight() {
     return weight;
 }
