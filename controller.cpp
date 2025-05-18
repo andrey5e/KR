@@ -530,3 +530,14 @@ void GameController::takeShot(Player* whoShots, Player* whoseField, QPoint point
         }
     }
 }
+
+// Обработка выстрела игрока
+void GameController::playerShot(QPoint point) {
+    takeShot(player, bot, point);
+}
+
+// Обработка выстрела бота
+void GameController::botShot() {
+    takeShot(bot, player, QPoint(-1, -1));
+    sleep(FOR_TEST_BOT_DELAY);
+}
