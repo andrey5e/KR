@@ -105,3 +105,64 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
         }
     }
 }
+
+// Визуализация игрового поля
+void MainWindow::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+    QPainter painter(this);
+    QVector<Cell> currentCellsState = gameController->getPlayerAllCells();
+    for (int i {0}; i < currentCellsState.size(); i++) {
+        QPoint drawPoint;
+        int x = i % 10;
+        int y = i / 10;
+        if (x < 5 && y < 5) {
+            drawPoint.setX(MYFIELD_X + (x * CELL_SIZE));
+            drawPoint.setY(MYFIELD_Y + (y * CELL_SIZE));
+        } else {
+            drawPoint.setX(MYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+            drawPoint.setY(MYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+        }
+        if (currentCellsState[i] == Cell::SHIP) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/MyK.jpg"));
+        } else if (currentCellsState[i] == Cell::DAMAGED) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/RedK2.jpg"));
+        } else if (currentCellsState[i] == Cell::DEAD) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/RedK.jpg"));
+        } else if (currentCellsState[i] == Cell::DOT) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/T.png"));
+        }
+    }
+    QVector<Cell> currentCellsStateBot = gameController->getBotAllCells();
+    for (int i {0}; i < currentCellsStateBot.size(); i++) {
+        QPoint drawPoint;
+        int x = i % 10;
+        int y = i / 10;
+        if (x < 5 && y < 5) {
+            drawPoint.setX(ENEMYFIELD_X + (x * CELL_SIZE));
+            drawPoint.setY(ENEMYFIELD_Y + (y * CELL_SIZE));
+        } else {
+            drawPoint.setX(ENEMYFIELD_HALF_X + ((x - 5) * CELL_SIZE));
+            drawPoint.setY(ENEMYFIELD_HALF_Y + ((y - 5) * CELL_SIZE));
+        }
+        if (currentCellsStateBot[i] == Cell::DOT) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/T.png"));
+        } else if (currentCellsStateBot[i] == Cell::DAMAGED) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/MyK2"));
+        } else if (currentCellsStateBot[i] == Cell::DEAD) {
+            painter.drawPixmap(drawPoint, QPixmap("C:/LR/MyK"));
+        }
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    if (gameController->getGameState() == GameState::SHIPS_PLACING) {
+        if (event->key() == Qt::Key_Space) {
+            if (gameController->checkPlayerShipPlacement()) {
+                gameController->syncPlayerShipsCells();
+                gameController->botRandomShipsPlacing();
+                gameController->setGameState(GameState::PLAYER_TURN);
+                gameController->infoLabel->setText("Ваш ход!");
+            }
+        }
+    }
+}
