@@ -20,7 +20,7 @@ public:
 private:
     GameController* gameController;
 protected:
-    void mousePressEvent(QMouseEvent *event) override; // Обработка нажатия правой кнопкой мыши
+    void mousePressEvent(QMouseEvent *event) override; // Обработка нажатия кнопки мыши
     void paintEvent(QPaintEvent *event) override; // Визуализация игрового поля
     void keyPressEvent(QKeyEvent *event) override; // Обработка нажатий клавиш
 };
