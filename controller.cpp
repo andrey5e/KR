@@ -526,7 +526,7 @@ void GameController::takeShot(Player* whoShots, Player* whoseField, QPoint point
                 board->setCellState(QPoint(shotedShip->getCoords().x(), shotedShip->getCoords().y() - 1), Cell::DOT);
                 board->setCellState(QPoint(shotedShip->getCoords().x(), shotedShip->getCoords().y() + shotedShip->getWeight()), Cell::DOT);
             }
-            qDebug() << "Уничтожен" << shotedShip->getWeight() << "- палубник";
+            qDebug() << "Уничтожен" << shotedShip->getWeight() << "- палубник.";
         }
     }
 }
