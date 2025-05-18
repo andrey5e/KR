@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "controller.h"
 #include <QMouseEvent>
 #include <QPixMap>
 #include <QPainter>
@@ -10,20 +9,20 @@
 #include <QVector>
 #include <QKeyEvent>
 #include <QApplication>
+#include "controller.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow{
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QPoint getCoordsPlayer(int x, int y);
-    QPoint getCoords(int x, int y, int fieldX, int fieldY);
+    QPoint getCoords(int x, int y, int fieldX, int fieldY); // Получение координат
 private:
     GameController* gameController;
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override; // Обработка нажатия правой кнопкой мыши
+    void paintEvent(QPaintEvent *event) override; // Визуализация игрового поля
+    void keyPressEvent(QKeyEvent *event) override; // Обработка нажатий клавиш
 };
 
 #endif // MAINWINDOW_H
