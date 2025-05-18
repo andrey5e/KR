@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
     setFixedSize(555, 289); // Установка размера главного окна
     gameController = new GameController(); // Инициализация контроллера игры
-    qDebug() << "Главное окно создано, контроллер инициализирован"; // Отладка
+    qDebug() << "Главное окно успешно создано. Контроллер инициализирован."; // Отладка
     QPalette pal;
     pal.setBrush(QPalette::Active, QPalette::Window, QBrush(QPixmap("C:/LR/field.png"))); // Установка фона главного окна
     this->setPalette(pal);
