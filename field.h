@@ -15,15 +15,15 @@ enum Cell {
 class Board {
 public:
     Board();
-    void addShip(Ship* ship);
-    void setCellState(QPoint point, Cell state);
-    Cell getCellState(QPoint point);
-    void printBoardStates();
-    QVector<Cell> getCells();
-    QVector<Ship *> getFlot();
-    void prettyPrintFlot();
-    void clear();
-    Ship *getShipByCell(QPoint point);
+    void addShip(Ship* ship); // Добавление корабля в флот
+    void setCellState(QPoint point, Cell state); // Установка состояния ячейки на игровом поле
+    Cell getCellState(QPoint point); // Получение состояния ячейки на игровом поле
+    void printBoardStates(); // Вывод состояния игрового поля в виде матрицы
+    QVector<Cell> getCells(); // Получение всех ячеек игрового поля
+    QVector<Ship *> getFlot(); // Получения флота (списка кораблей)
+    void prettyPrintFlot(); // Вывод информации о кораблях
+    void clear(); // Очистка игрового поля, устанавливая все ячейки в состояние EMPTY
+    Ship *getShipByCell(QPoint point); // Получение корабля по координатам ячейки
 private:
     QVector<Cell> cells;
     QVector<Ship*> flot;
