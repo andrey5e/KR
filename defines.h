@@ -24,4 +24,16 @@ const int FIELD_HEIGHT = 217; // Высота
 // Размер ячейки на игровом поле (ширина / 10)
 const int CELL_SIZE = FIELD_WIDTH / 10;
 
+// Количество кораблей
+const int SHIPS4COUNT = 1; // 4 - палубник
+const int SHIPS3COUNT = 2; // 3 - палубники
+const int SHIPS2COUNT = 3; // 2 - палубники
+const int SHIPS1COUNT = 4; // 1 - палубники
+
+// Задержка для тестов
+const float FOR_TEST_BOT_DELAY = 0.5;
+
+// Задержка для бота
+const int REAL_BOT_DELAY = 1;
+
 #endif // DEFINES_H
