@@ -1,3 +1,6 @@
 #include "shot.h"
 
-shot::shot() {}
+// Ручной выстрел
+QPoint ManualShotStrategy::shot(QPoint point) {
+    return point;
+}
