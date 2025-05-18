@@ -154,6 +154,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     }
 }
 
+// Обработка нажатий клавиш
 void MainWindow::keyPressEvent(QKeyEvent *event) {
     if (gameController->getGameState() == GameState::SHIPS_PLACING) {
         if (event->key() == Qt::Key_Space) {
