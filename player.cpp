@@ -1,41 +1,40 @@
 #include "player.h"
 
 Player::Player() {
-    board = new Board();
+    board = new Board(); // Формирование игрового поля
 }
-Player::~Player() {}
 
+Player::~Player() {
+    delete board; // Освобождение памяти, занятой игровым полем
+}
+
+// Создание флота
 void Player::createFlot() {
-    
-    // 4 - палубники
     for (int i {0}; i < SHIPS4COUNT; i++) {
         board->addShip(createShip(4));
     }
-
-    // 3 - палубники
     for (int i {0}; i < SHIPS3COUNT; i++) {
         board->addShip(createShip(3));
     }
-
-    // 2 - палубники
     for (int i {0}; i < SHIPS2COUNT; i++) {
         board->addShip(createShip(2));
     }
-
-    // 1 - палубники
     for (int i {0}; i < SHIPS1COUNT; i++) {
         board->addShip(createShip(1));
     }
 }
 
+// Получение игрового поля игрока
 Board *Player::getBoard() {
     return board;
 }
 
+// Выстрел в заданную точку
 QPoint Player::performShot(QPoint point) {
     return shotS->shot(point);
 }
 
+// Создание корабля
 Ship* HumanPlayer::createShip(int w) {
     if (w == 1) {
         return new OnePartShip();
@@ -46,11 +45,12 @@ Ship* HumanPlayer::createShip(int w) {
     } else if (w == 4) {
         return new FourPartShip();
     } else {
-        qDebug() << "Введён некорректный вес корабля";
+        qDebug() << "Некорректный вес корабля.";
         return nullptr;
     }
 }
 
+// Создание вражеского корабля
 Ship* AIPlayer::createShip(int w) {
     if (w == 1) {
         return new OnePartShip();
@@ -61,7 +61,7 @@ Ship* AIPlayer::createShip(int w) {
     } else if (w == 4) {
         return new FourPartShip();
     } else {
-        qDebug() << "Введён некорректный вес корабля";
+        qDebug() << "Некорректный вес корабля.";
         return nullptr;
     }
 }
