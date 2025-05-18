@@ -34,3 +34,59 @@ void Board::printBoardStates() {
     }
     qDebug() << "\n";
 }
+
+// Получение всех ячеек игрового поля
+QVector<Cell> Board::getCells() {
+    return cells;
+}
+
+// Получения флота (списка кораблей)
+QVector<Ship *> Board::getFlot() {
+    return flot;
+}
+
+// Вывод информации о кораблях
+void Board::prettyPrintFlot() {
+    for (Ship* ship : flot) {
+        qDebug() << "w: " << ship->getWeight() << ", " << ship->getCoords();
+    }
+}
+
+// Очистка игрового поля, устанавливая все ячейки в состояние EMPTY
+void Board::clear() {
+    for (Cell &cell : cells) {
+        cell = Cell::EMPTY;
+    }
+}
+
+// Получение корабля по координатам ячейки
+Ship *Board::getShipByCell(QPoint point) {
+    if (getCellState(point) != Cell::SHIP) {
+        qDebug() << "В функцию getShipByCell передана клетка без корабля.";
+        return nullptr;
+    }
+    for (Ship* ship : flot) {
+        if (ship->getCoords() == point)
+            return ship;
+    }
+    if (getCellState(QPoint(point.x() - 1, point.y())) == Cell::SHIP ||
+        getCellState(QPoint(point.x() - 1, point.y())) == Cell::DAMAGED) {
+        while (true) {
+            point = QPoint(point.x() - 1, point.y());
+            for (Ship* ship : flot) {
+                if (ship->getCoords() == point)
+                    return ship;
+            }
+        }
+    } else {
+        while (true) {
+            point = QPoint(point.x(), point.y() - 1);
+            for (Ship* ship : flot) {
+                if (ship->getCoords() == point)
+                    return ship;
+            }
+        }
+    }
+    qDebug() << "Корабль не найден.";
+    return nullptr;
+}
